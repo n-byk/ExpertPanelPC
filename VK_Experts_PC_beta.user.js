@@ -2,7 +2,7 @@
 // @name VK Experts PC (beta) | Тематические ленты
 // @namespace http://tampermonkey.net/
 // @require http://code.jquery.com/jquery-1.12.4.min.js
-// @version 1.0
+// @version 1.1
 // @license MIT
 // @author NiByk, vk.com/nibyk
 // @match https://vk.com/*
@@ -78,7 +78,7 @@ function tematic()
 			}
 			panel_vkexperts.innerHTML += '<div class="more_div"></div>';
 			var def = 0; var name_post = ''; var url_post = ''; var photo_post = ''; var add = ''; var response = 0;
-			var tematic = `<div id="wrap2"> 	<div id="wrap1"> 		<div id="content"><div class="wide_column_left"> 			 			<div class="wide_column_wrap" style="margin-right: 0px;"> 				<div class="wide_column" id="wide_column"> 					<div id="tematic_id" hidden>0</div><div id="tematic_name" hidden>0</div><div id="next_page" hidden>0</div><div id="loader-experts" class="bookmarks_rows bookmarks_rows_" data-stat-container="bookmarks">`;
+			var tematic = `<div id="wrap2"><div id="wrap1"><div id="content"><div class="wide_column_left"><div class="wide_column_wrap" style="margin-right: 0px;"><div class="wide_column" id="wide_column"><div id="tematic_id" hidden>0</div><div id="tematic_name" hidden>0</div><div id="next_page" hidden>0</div><div id="loader-experts" class="bookmarks_rows bookmarks_rows_" data-stat-container="bookmarks">`;
 			var p_tematic = '';
 			data['response']['items'].forEach(function(item)
 				{
@@ -99,7 +99,7 @@ function tematic()
 					{
 						if(def === 0 && typeof item['source_id'] !== 'undefined')
 						{
-							var response = 1; add = `<h2 class="page_block_h2"> 							<div class="page_block_header clear_fix"> 								<div class="page_block_header_extra_left _header_extra_left"></div> 								<div class="page_block_header_extra _header_extra"></div> 								<div class="page_block_header_inner _header_inner"><div class="ui_crumb">`+manetitle+` тематическая лента</div></div> 							</div> 							</h2>`;
+							var response = 1; add = `<h2 class="page_block_h2"><div class="page_block_header clear_fix"><div class="page_block_header_extra_left _header_extra_left"></div><div class="page_block_header_extra _header_extra"></div><div class="page_block_header_inner _header_inner"><div class="ui_crumb">`+manetitle+` тематическая лента</div></div></div></h2>`;
 							} else if (typeof item['source_id'] !== 'undefined'){
 							var response = 1; add = '';
 							} else {
@@ -108,21 +108,21 @@ function tematic()
 						}
 						if(response === 1)
 						{
-							tematic = tematic+`					<div class="page_block bookmark_block">`+add+`<div class="bookmarks_row wall_module bookmarks_row_type_post"><div id="post`+item[`source_id`]+`_`+item[`post_id`]+`" class="_post post post--with-likes closed_comments deep_active" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-replies-limit="0" post_view_hash="test"> 								<div class="_post_content"> 									 									<div class="post_header"> 										<a class="post_image" href="/`+url_post+`"> 											<img src="`+photo_post+`" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_img" width="50" height="50" class="post_img" alt="`+name_post+`"> 											<span class="blind_label">.</span> 										</a> 										 										<div class="post_header_info"> 											<h5 class="post_author"><a class="author" href="/`+url_post+`" data-from-id="-33494375" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_link">`+name_post+`</a><span class="explain"><span class="wall_fixed_label"> запись закреплена</span></span></h5> 											<div class="post_date"><a class="post_link" href="/wall`+item[`source_id`]+`_`+item[`post_id`]+`" onclick="return showWiki({w: 'wall`+item[`source_id`]+`_`+item[`post_id`]+`'}, false, event);"><span class="rel_date">`+convertTimestamp(item[`date`])+`</span></a></div> 											 										</div> 									</div> 									<div class="post_content"> 										<div class="post_info"> 											<div class="wall_text"><div id="wpt`+item[`source_id`]+`_`+item[`post_id`]+`" class="wall_post_cont _wall_post_cont"><div class="wall_post_text" style="font-size: 14px;">`+item[`text`].replace(/(?:\r\n|\r|\n)/g,`<br>`)+`</div>`+getPhotoVideoPost(item)+``+getAttachPostMusic(item)+`</div></div> 											 											<div class="like_wrap _like_wall`+item[`source_id`]+`_`+item[`post_id`]+` "> 												<div class="like_cont "> 													<div class="like_btns"> 														<a class="like_btn like _like" onclick="Likes.toggle(this, event, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', 'none');" onmouseover="Likes.showLikes(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', {})" data-count="1520" role="button" title="Нравится"> 															<div class="like_button_icon"></div> 															<div class="like_button_label"></div> 															<div class="like_button_count">`+convertCount(item[`likes`][`count`])+`</div> 															<span class="blind_label">Нравится</span> 															 														</a> 														<span class="blind_label" tabindex="0" role="link" onclick="Likes.showLikesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список оценивших</span><a class="like_btn share _share" onclick="Likes.share('wall`+item[`source_id`]+`_`+item[`post_id`]+`', {}); return false;" onmouseover="Likes.showShare(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`');" data-count="15" role="button" title="Поделиться"> 															<div class="like_button_icon"></div> 															<div class="like_button_label"></div> 															<div class="like_button_count">`+convertCount(item[`reposts`][`count`])+`</div> 															<span class="blind_label">Поделиться</span> 															 														</a> 														<span class="blind_label" tabindex="0" role="link" onclick="Likes.showSharesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список поделившихся</span> 														 													</div> 													<div class="like_views _views" onmouseover="Likes.updateViews('wall`+item[`source_id`]+`_`+item[`post_id`]+`');">`+convertCount(item[`views`][`count`])+`</div> 													 												</div> 											</div> 											 											 											<div class="replies"><div class="replies_wrap" id="replies_wrap`+item[`source_id`]+`_`+item[`post_id`]+`" style="display: none"> 												<div class="replies_list _replies_list" id="replies`+item[`source_id`]+`_`+item[`post_id`]+`"></div> 												 											</div></div> 										</div> 									</div> 									 								</div> 							</div></div><div class="bookmark_footer" id="bookmark_footer_647278091" style="display: none;"><div class="bookmark_tags" id="bookmark_tags_647278091" onclick="cur.cancelClick = true"></div></div> 					</div>`;
+							tematic = tematic+`<div class="page_block bookmark_block">`+add+`<div class="bookmarks_row wall_module bookmarks_row_type_post"><div id="post`+item[`source_id`]+`_`+item[`post_id`]+`" class="_post post post--with-likes closed_comments deep_active" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-replies-limit="0" post_view_hash="test"><div class="_post_content"><div class="post_header"><a class="post_image" href="/`+url_post+`" target="_blank"><img src="`+photo_post+`" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_img" width="50" height="50" class="post_img" alt="`+name_post+`"><span class="blind_label">.</span></a><div class="post_header_info"><h5 class="post_author"><a class="author" href="/`+url_post+`" data-from-id="-33494375" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_link" target="_blank">`+name_post+`</a><span class="explain"><span class="wall_fixed_label"> запись закреплена</span></span></h5><div class="post_date"><a class="post_link" href="/wall`+item[`source_id`]+`_`+item[`post_id`]+`" onclick="return showWiki({w: 'wall`+item[`source_id`]+`_`+item[`post_id`]+`'}, false, event);"><span class="rel_date">`+convertTimestamp(item[`date`])+`</span></a></div></div></div><div class="post_content"><div class="post_info"><div class="wall_text"><div id="wpt`+item[`source_id`]+`_`+item[`post_id`]+`" class="wall_post_cont _wall_post_cont"><div class="wall_post_text" style="font-size: 14px;">`+item[`text`].replace(/(?:\r\n|\r|\n)/g,`<br>`)+`</div>`+getPhotoVideoPost(item)+``+getAttachPostMusic(item)+`</div></div><div class="like_wrap _like_wall`+item[`source_id`]+`_`+item[`post_id`]+` "><div class="like_cont "><div class="like_btns"><a class="like_btn like _like" onclick="Likes.toggle(this, event, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', 'none');" onmouseover="Likes.showLikes(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', {})" data-count="1520" role="button" title="Нравится"><div class="like_button_icon"></div><div class="like_button_label"></div><div class="like_button_count">`+convertCount(item[`likes`][`count`])+`</div><span class="blind_label">Нравится</span></a><span class="blind_label" tabindex="0" role="link" onclick="Likes.showLikesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список оценивших</span><a class="like_btn share _share" onclick="Likes.share('wall`+item[`source_id`]+`_`+item[`post_id`]+`', {}); return false;" onmouseover="Likes.showShare(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`');" data-count="15" role="button" title="Поделиться"><div class="like_button_icon"></div><div class="like_button_label"></div><div class="like_button_count">`+convertCount(item[`reposts`][`count`])+`</div><span class="blind_label">Поделиться</span></a><span class="blind_label" tabindex="0" role="link" onclick="Likes.showSharesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список поделившихся</span></div><div class="like_views _views" onmouseover="Likes.updateViews('wall`+item[`source_id`]+`_`+item[`post_id`]+`');">`+convertCount(item[`views`][`count`])+`</div></div></div><div class="replies"><div class="replies_wrap" id="replies_wrap`+item[`source_id`]+`_`+item[`post_id`]+`" style="display: none"><div class="replies_list _replies_list" id="replies`+item[`source_id`]+`_`+item[`post_id`]+`"></div></div></div></div></div></div></div></div><div class="bookmark_footer" id="bookmark_footer_647278091" style="display: none;"><div class="bookmark_tags" id="bookmark_tags_647278091" onclick="cur.cancelClick = true"></div></div></div>`;
 						}
 					}
 					else
 					{
 						if(typeof item['source_id'] !== 'undefined')
 						{
-							p_tematic = p_tematic+`					<div class="page_block bookmark_block">`+add+`<div class="bookmarks_row wall_module bookmarks_row_type_post"><div id="post`+item[`source_id`]+`_`+item[`post_id`]+`" class="_post post post--with-likes closed_comments deep_active" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-replies-limit="0" post_view_hash="test"> 								<div class="_post_content"> 									 									<div class="post_header"> 										<a class="post_image" href="/`+url_post+`"> 											<img src="`+photo_post+`" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_img" width="50" height="50" class="post_img" alt="`+name_post+`"> 											<span class="blind_label">.</span> 										</a> 										 										<div class="post_header_info"> 											<h5 class="post_author"><a class="author" href="/`+url_post+`" data-from-id="-33494375" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_link">`+name_post+`</a><span class="explain"><span class="wall_fixed_label"> запись закреплена</span></span></h5> 											<div class="post_date"><a class="post_link" href="/wall`+item[`source_id`]+`_`+item[`post_id`]+`" onclick="return showWiki({w: 'wall`+item[`source_id`]+`_`+item[`post_id`]+`'}, false, event);"><span class="rel_date">`+convertTimestamp(item[`date`])+`</span></a></div> 											 										</div> 									</div> 									<div class="post_content"> 										<div class="post_info"> 											<div class="wall_text"><div id="wpt`+item[`source_id`]+`_`+item[`post_id`]+`" class="wall_post_cont _wall_post_cont"><div class="wall_post_text" style="font-size: 14px;">`+item[`text`].replace(/(?:\r\n|\r|\n)/g,`<br>`)+`</div>`+getPhotoVideoPost(item)+``+getAttachPostMusic(item)+`</div></div> 											 											<div class="like_wrap _like_wall`+item[`source_id`]+`_`+item[`post_id`]+` "> 												<div class="like_cont "> 													<div class="like_btns"> 														<a class="like_btn like _like" onclick="Likes.toggle(this, event, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', 'none');" onmouseover="Likes.showLikes(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', {})" data-count="1520" role="button" title="Нравится"> 															<div class="like_button_icon"></div> 															<div class="like_button_label"></div> 															<div class="like_button_count">`+convertCount(item[`likes`][`count`])+`</div> 															<span class="blind_label">Нравится</span> 															 														</a> 														<span class="blind_label" tabindex="0" role="link" onclick="Likes.showLikesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список оценивших</span><a class="like_btn share _share" onclick="Likes.share('wall`+item[`source_id`]+`_`+item[`post_id`]+`', {}); return false;" onmouseover="Likes.showShare(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`');" data-count="15" role="button" title="Поделиться"> 															<div class="like_button_icon"></div> 															<div class="like_button_label"></div> 															<div class="like_button_count">`+convertCount(item[`reposts`][`count`])+`</div> 															<span class="blind_label">Поделиться</span> 															 														</a> 														<span class="blind_label" tabindex="0" role="link" onclick="Likes.showSharesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список поделившихся</span> 														 													</div> 													<div class="like_views _views" onmouseover="Likes.updateViews('wall`+item[`source_id`]+`_`+item[`post_id`]+`');">`+convertCount(item[`views`][`count`])+`</div> 													 												</div> 											</div> 											 											 											<div class="replies"><div class="replies_wrap" id="replies_wrap`+item[`source_id`]+`_`+item[`post_id`]+`" style="display: none"> 												<div class="replies_list _replies_list" id="replies`+item[`source_id`]+`_`+item[`post_id`]+`"></div> 												 											</div></div> 										</div> 									</div> 									 								</div> 							</div></div><div class="bookmark_footer" id="bookmark_footer_647278091" style="display: none;"><div class="bookmark_tags" id="bookmark_tags_647278091" onclick="cur.cancelClick = true"></div></div> 					</div>`;
+							p_tematic = p_tematic+`<div class="page_block bookmark_block">`+add+`<div class="bookmarks_row wall_module bookmarks_row_type_post"><div id="post`+item[`source_id`]+`_`+item[`post_id`]+`" class="_post post post--with-likes closed_comments deep_active" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-replies-limit="0" post_view_hash="test"><div class="_post_content"><div class="post_header"><a class="post_image" href="/`+url_post+`" target="_blank"><img src="`+photo_post+`" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_img" width="50" height="50" class="post_img" alt="`+name_post+`"><span class="blind_label">.</span></a><div class="post_header_info"><h5 class="post_author"><a class="author" href="/`+url_post+`" data-from-id="-33494375" data-post-id="`+item[`source_id`]+`_`+item[`post_id`]+`" data-post-click-type="post_owner_link" target="_blank">`+name_post+`</a><span class="explain"><span class="wall_fixed_label"> запись закреплена</span></span></h5><div class="post_date"><a class="post_link" href="/wall`+item[`source_id`]+`_`+item[`post_id`]+`" onclick="return showWiki({w: 'wall`+item[`source_id`]+`_`+item[`post_id`]+`'}, false, event);"><span class="rel_date">`+convertTimestamp(item[`date`])+`</span></a></div></div></div><div class="post_content"><div class="post_info"><div class="wall_text"><div id="wpt`+item[`source_id`]+`_`+item[`post_id`]+`" class="wall_post_cont _wall_post_cont"><div class="wall_post_text" style="font-size: 14px;">`+item[`text`].replace(/(?:\r\n|\r|\n)/g,`<br>`)+`</div>`+getPhotoVideoPost(item)+``+getAttachPostMusic(item)+`</div></div><div class="like_wrap _like_wall`+item[`source_id`]+`_`+item[`post_id`]+` "><div class="like_cont "><div class="like_btns"><a class="like_btn like _like" onclick="Likes.toggle(this, event, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', 'none');" onmouseover="Likes.showLikes(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`', {})" data-count="1520" role="button" title="Нравится"><div class="like_button_icon"></div><div class="like_button_label"></div><div class="like_button_count">`+convertCount(item[`likes`][`count`])+`</div><span class="blind_label">Нравится</span></a><span class="blind_label" tabindex="0" role="link" onclick="Likes.showLikesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список оценивших</span><a class="like_btn share _share" onclick="Likes.share('wall`+item[`source_id`]+`_`+item[`post_id`]+`', {}); return false;" onmouseover="Likes.showShare(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`');" data-count="15" role="button" title="Поделиться"><div class="like_button_icon"></div><div class="like_button_label"></div><div class="like_button_count">`+convertCount(item[`reposts`][`count`])+`</div><span class="blind_label">Поделиться</span></a><span class="blind_label" tabindex="0" role="link" onclick="Likes.showSharesList(this, 'wall`+item[`source_id`]+`_`+item[`post_id`]+`')">Показать список поделившихся</span></div><div class="like_views _views" onmouseover="Likes.updateViews('wall`+item[`source_id`]+`_`+item[`post_id`]+`');">`+convertCount(item[`views`][`count`])+`</div></div></div><div class="replies"><div class="replies_wrap" id="replies_wrap`+item[`source_id`]+`_`+item[`post_id`]+`" style="display: none"><div class="replies_list _replies_list" id="replies`+item[`source_id`]+`_`+item[`post_id`]+`"></div></div></div></div></div></div></div></div><div class="bookmark_footer" id="bookmark_footer_647278091" style="display: none;"><div class="bookmark_tags" id="bookmark_tags_647278091" onclick="cur.cancelClick = true"></div></div></div>`;
 						}
 					}
 					def++;
 				});
 				if(parseInt(next_page) === 0)
 				{
-					tematic = tematic+`</div> 				</div> 			</div> 		</div></div> 	</div> </div>	`;
+					tematic = tematic+`</div></div></div></div></div></div></div>`;
 					document.getElementById("wrap3").innerHTML = tematic;
 				}
 				else
@@ -207,7 +207,6 @@ function getPhotoVideoPost(json)
 				nachalo = nachalo+`<a aria-label="фотография" onclick="return showPhoto('`+size[0]+`_`+size[1]+`', 'wall`+json[`source_id`]+`_`+json[`post_id`]+`', event)" style="width: `+nwidth+`px; height: `+nheight+`px;background-image: url(`+size[2]+`);" class="page_post_thumb_wrap image_cover fl_l page_post_thumb_not_single" data-photo-id="`+size[0]+`_`+size[1]+`"></a>`;
 				} else {
 				nachalo = nachalo+`<a href="/video`+size[0]+`_`+size[1]+`?list=`+size[6]+`" data-video="`+size[0]+`_`+size[1]+`" data-list="`+size[6]+`" data-duration="1144" onclick="return showInlineVideo(&quot;`+size[0]+`_`+size[1]+`&quot;, &quot;`+size[6]+`&quot;, {&quot;autoplay&quot;:1,&quot;hash&quot;:&quot;`+size[6]+`&quot;,&quot;addParams&quot;:{&quot;post_id&quot;:&quot;`+json[`source_id`]+`_`+json[`post_id`]+`&quot;}}, event, this);" style="width: `+nwidth+`px; height: `+nheight+`px;background-image: url(`+size[2]+`);" class="page_post_thumb_wrap image_cover page_post_thumb_video page_post_thumb_last_column page_post_thumb_last_row"><div class="page_post_video_play_inline"></div><div class="video_thumb_label"><span class="video_thumb_label_item">Может не открыться</span><span class="video_thumb_label_item">`+convertTimeAuVi(size[7])+`</span></div></a>`;
-
 			}
 		});
 		return nachalo+`</div>`;
@@ -215,134 +214,60 @@ function getPhotoVideoPost(json)
 }
 
 function ExpertButtons() {
-
 	function insertStyles() {
 		const style = document.createElement('style');
-
-		style.innerHTML = `
-		.arrow-container { /* для дива со стрелочками и счетчиком */
-		display: flex;
-		flex: -0.8;
-		justify-content: space-between;
-		align-items: center;
-		margin-left: auto;
-		padding-right: 10px;
-		}
-
-		.arrow {
-		border-right: 10px solid transparent;
-		border-left: 10px solid transparent;
-		border-bottom: 10px solid #D6D8DB;
-		position: relative;
-		}
-
-		.arrow-counter { /* счетчик голосов */
-		line-height: 14px;
-		color: #909399;
-		font-weight: bold;
-		padding: 10px;
-		}
-
-		.arrow::before {
-		content: '';
-		border-left: 10px solid transparent;
-		border-right: 10px solid transparent;
-		border-bottom: 10px solid #fff;
-		position: absolute;
-		top: 60%;
-		margin-top: 3px;
-		margin-left: -10px;
-		}
-
-		.arrow-up {} /* стрелка вверх */
-
-		.arrow-down { /* стрелка вниз */
-		transform: rotate(180deg);
-		}
-		.arrow-up:hover {
-		border-bottom: 10px solid #3390FF;
-		transition: .5s;
-		}
-
-		.arrow-down:hover {
-		border-bottom: 10px solid #3390FF;
-		transition: .5s;
-		}
-
-		.arrow[selected] {
-		border-bottom: 10px solid #3390FF;
-		}
-		`;
-
+		style.innerHTML = `.arrow-container { display: flex; flex: -0.8; justify-content: space-between; align-items: center; margin-left: auto; padding-right: 10px; } .arrow { border-right: 10px solid transparent; border-left: 10px solid transparent; border-bottom: 10px solid #D6D8DB; position: relative; } .arrow-counter { line-height: 14px; color: #909399; font-weight: bold; padding: 10px; } .arrow::before { content: ''; border-left: 10px solid transparent; border-right: 10px solid transparent; border-bottom: 10px solid #fff; position: absolute; top: 60%; margin-top: 3px; margin-left: -10px; } .arrow-up {} .arrow-down { transform: rotate(180deg); } .arrow-up:hover { border-bottom: 10px solid #3390FF; transition: .5s; } .arrow-down:hover { border-bottom: 10px solid #3390FF; transition: .5s; } .arrow[selected] { border-bottom: 10px solid #3390FF; }`;
 		document.head.appendChild(style);
 	}
-
 	function searchPosts(el) {
-		// .post - пост в ленте, .wl_post - пост в модальном окне
-		// Оба типа постов имеют атрибут data-post-id
 		const postsArray = el.querySelectorAll('.post, .wl_post');
 		if(!postsArray) return;
-
 		postsArray.forEach((post) => {
 			if(post.checked) return;
 			else post.checked = true;
-
 			setTimeout(() => { checkPost(post); }, getRandomInRange(1000,5000));
 		});
 	}
-
 	async function checkPost(post) {
 		const { response: { items: [postInfo] } } = await vkapi('wall.getById', {
 			posts: post.dataset.postId,
 			extended: 1
 		});
-
 		if(postInfo.rating) {
 			renderButtons(post, postInfo.rating);
 		}
 	}
-
 	function renderButtons(post, rating) {
 		const post_id = post.dataset.postId;
-
 		const arrowUp = document.createElement('a');
 		arrowUp.classList.add('arrow');
 		arrowUp.classList.add('arrow-up');
 		arrowUp.setAttribute('data-post', post_id);
 		arrowUp.addEventListener('mousedown', makeVote);
-
 		const arrowDown = document.createElement('a');
 		arrowDown.classList.add('arrow');
 		arrowDown.classList.add('arrow-down');
 		arrowDown.setAttribute('data-post', post_id);
 		arrowDown.addEventListener('mousedown', makeVote);
-
 		const counter = document.createElement('div');
 		counter.classList.add('arrow-counter');
 		counter.setAttribute('rated', rating.rated);
 		counter.innerText = rating.value || '';
-
 		if(rating.rated == 1) arrowUp.setAttribute('selected', true);
 		if(rating.rated == -1) arrowDown.setAttribute('selected', true);
-
 		const container = document.createElement('div');
 		container.classList.add('arrow-container');
 		container.appendChild(arrowUp);
 		container.appendChild(counter);
 		container.appendChild(arrowDown);
-
 		post.querySelector('.like_views').before(container);
 	}
-
 	async function makeVote({ target }) {
 		const [owner_id, post_id] = target.getAttribute('data-post').split('_');
 		let new_vote = 0;
-
 		if(target.classList.contains('arrow-up')) new_vote = 1;
 		if(target.classList.contains('arrow-down')) new_vote = -1;
-
 		const counter = target.parentElement.querySelector('.arrow-counter');
-
 		let response = await vkapi('newsfeed.setPostVote', {
 			owner_id,
 			post_id,
@@ -358,23 +283,19 @@ function ExpertButtons() {
 			counter.innerText = counter.innerText && (counter.innerText - counter.getAttribute('rated'));
 			counter.setAttribute('rated', 0);
 			} else {
-			// Если до клика одна кнопка была активна, то new_vote != 0
 			if(new_vote) {
 				target.parentElement.querySelector(
 					new_vote == 1 ? '.arrow-down' : '.arrow-up'
 				).removeAttribute('selected');
 			}
-
 			counter.innerText = counter.innerText && (counter.innerText - counter.getAttribute('rated') + new_vote);
 			target.setAttribute('selected', true);
 			counter.setAttribute('rated', new_vote);
 		}
 	}
-
 	window.addEventListener('load', () => {
 		insertStyles();
 		searchPosts(document.body);
-
 		const observer = new MutationObserver((mutations) => {
 			mutations.forEach((mutation) => {
 				if(mutation.target.nodeType == 1) {
@@ -382,7 +303,6 @@ function ExpertButtons() {
 				}
 			});
 		});
-
 		observer.observe(document.body, {
 			childList: true,
 			subtree: true
@@ -423,7 +343,6 @@ function convertTimestamp(timestamp) {
 	h = hh,
 	min = ('0' + d.getMinutes()).slice(-2), // Конвертируем метку в минуты
 	time;
-
 	time = dd + '.' + mm + '.' + yyyy + ' в ' + h + ':' + min; // Шаблон вывода: год-месяц-день, часы-минуты
 	return time;
 }
@@ -494,13 +413,10 @@ function getRandomInRange(min, max) {
 function vkapi(method, params = {}) {
 	return new Promise((resolve, reject) => {
 		const paramsList = [`access_token=${access_token}`, 'v=5.118', 'lang=ru'];
-
 		for(const key in params) {
 			paramsList.push(`${key}=${encodeURIComponent(params[key])}`);
 		}
-
 		const req = new XMLHttpRequest();
-
 		req.open('POST', `https://api.vk.com/method/${method}`, true);
 		req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		req.responseType = 'json';
