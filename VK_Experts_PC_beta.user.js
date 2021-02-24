@@ -464,7 +464,7 @@ function convertTimeAuVi(time)
 var next_page_scroll = true;
 function scrollMore()
 {
-	if(window.location.href.includes('/experts?mod=') && document.getElementById('tematic_id') && document.getElementById('tematic_name') && document.getElementById('next_page'))
+	if(document.getElementById('tematic_id') && document.getElementById('tematic_name') && document.getElementById('next_page'))
 	{
 		var body = document.body,
 		html = document.documentElement;
