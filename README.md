@@ -1,5 +1,5 @@
 # VK Experts PC (beta) | Тематические ленты
-![Отображение панели](https://apihot.ru/expert.jpg)
+![Отображение панели](https://raw.githubusercontent.com/n-byk/ExpertPanelPC/main/versions/prev.jpg)
 ## Как добавить панель?
 1. Установить tampermonkey, https://tampermonkey.net;
 2. Перейти по ссылке https://github.com/n-byk/ExpertPanelPC/raw/main/VK_Experts_PC_beta.user.js;
